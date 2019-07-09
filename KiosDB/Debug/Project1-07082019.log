@@ -1,5 +1,0 @@
-﻿  DbNode.cpp
-  main.cpp
-  Generating Code...
-C:\Users\Johnny\source\repos\Project1-07082019\Project1-07082019\DbNode.h(16,2): warning C4624:  'DbNode::data': destructor was implicitly defined as deleted
-  Project1-07082019.vcxproj -> C:\Users\Johnny\source\repos\Project1-07082019\Debug\Project1-07082019.exe

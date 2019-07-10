@@ -3,6 +3,7 @@
 #define DATABASE
 #include <list>
 #include "DataContainer.h"
+#include "Listener.h"
 
 class Database {
 public:
@@ -10,9 +11,8 @@ public:
 	bool isRunning() { return running; };
 private:
 	bool running;
-	const int port;
-	// Children of this root database class must be data containers 
 	std::list<DataContainer> children;
+	Listener* l;
 };
 
 #endif

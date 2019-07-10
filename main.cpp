@@ -2,7 +2,7 @@
 #include <fstream>
 #include "Database.h"
 
-#define PORT 30606
+const int PORT = 30606;
 
 int main() {
 	// "Start" the database

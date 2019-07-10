@@ -2,12 +2,12 @@
 #ifndef DATA_CONTAINER
 #define DATA_CONTAINER
 
-#include "DbNode.h"
+#include "DataNode.h"
 
 class DataContainer {
 public:
 	std::string hash;
 private:
-	std::list<DbNode> children;
+	std::list<DataNode> children;
 };
 #endif

@@ -1,12 +1,12 @@
 #pragma once
-#ifndef DB_NODE
-#define DB_NODE
+#ifndef DATA_NODE
+#define DATA_NODE
 
 #include <list>
 #include <string>
 #include <functional>
 
-struct DbNode {
+struct DataNode {
 public:
 	std::string hash;
 	enum Type { INTEGER, DOUBLE, FLOAT, STRING };

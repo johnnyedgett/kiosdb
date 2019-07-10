@@ -1,4 +1,4 @@
-#include "Listener.h"
+#include "DBListener.h"
 #include <thread>
 
 string read_(tcp::socket & socket) {
@@ -13,13 +13,13 @@ void send_(tcp::socket & socket, const string& message) {
 	boost::asio::write( socket, boost::asio::buffer(message) );  
 } 
 
-void Listener::listen(){
+void DBListener::doListen(){
 	boost::asio::io_service io_service;
 
-	cout << "Listening on port " << PORT << endl;
+	cout << "Listening on port " << 30606 << endl;
 	
 	// Listen
-	tcp::acceptor acceptor_(io_service, tcp::endpoint(tcp::v4(), PORT));
+	tcp::acceptor acceptor_(io_service, tcp::endpoint(tcp::v4(), 30606));
 
 	// Create the socket
 	tcp::socket socket_(io_service);
@@ -36,7 +36,3 @@ void Listener::listen(){
 	send_(socket_, "Works!");
 }
 
-Listener::Listener(const int PORT) : PORT(PORT) {
-	std::thread doListen(Listener::listen);
-	doListen.join();
-}

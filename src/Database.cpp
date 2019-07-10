@@ -1,8 +1,7 @@
 #include "Database.h"
-#include "Listener.h"
-
+#include "DBListener.h"
+#include <iostream>
 Database::Database(const int PORT): running(true) {
-	Listener l(PORT);
+	DBListener l(PORT);
 	this->l = &l;
-
 }

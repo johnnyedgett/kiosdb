@@ -9,10 +9,8 @@
 class Database {
 public:
 	Database(const int PORT);
-	~Database(){ thread_.join(); }
 	bool isRunning() { return running; };
 private:
-	std::thread thread_;
 	bool running;
 	std::list<DataContainer> children;
 	DBListener* l;

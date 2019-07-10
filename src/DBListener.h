@@ -1,32 +1,45 @@
 #ifndef DBLISTENER
 #define DBLISTENER
 
+#include "DBConnection.h"
 #include <boost/asio.hpp>
+#include <boost/bind.hpp>
 #include <iostream>
 
-using namespace boost::asio;
-using ip::tcp;
-using std::string;
-using std::cout;
-using std::endl;
+using boost::asio::ip::tcp;
 
-
-class DBListener {
+class DBListener
+{
 public:
-	DBListener(const int PORT) : PORT(PORT) {
-		// std::thread{&DBListener::doListen}.detch();
-		 std::thread(&DBListener::doListen, this).detach();
+	DBListener(boost::asio::io_context& io_context)
+	: io_context_(io_context),
+		acceptor_(io_context, tcp::endpoint(tcp::v4(), 13))
+  	{
+    	start_accept();
+  	}
+
+private:
+	void start_accept()
+  	{
+    	DBConnection::pointer new_connection = DBConnection::create(io_context_);
+
+		acceptor_.async_accept(new_connection->socket(),
+			boost::bind(&DBListener::handle_accept, this, new_connection,
+			boost::asio::placeholders::error));
+  	}
+
+	void handle_accept(DBConnection::pointer new_connection,
+		const boost::system::error_code& error)
+  	{
+		if (!error)
+    	{
+     		new_connection->start();
+    	}
+    	start_accept();
 	}
 
-	~DBListener() { 
-		// thread_.join();
-	}
-	// string read_(tcp::socket & socket);
-	// void send_(tcp::socket & socket, const string& message);
-private:
-	const int PORT;
-	// std::thread thread_;
-	void doListen();
+	boost::asio::io_context& io_context_;
+	tcp::acceptor acceptor_;
 };
 
 #endif

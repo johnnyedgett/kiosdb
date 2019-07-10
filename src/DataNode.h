@@ -17,7 +17,7 @@ private:
 		int dataInt;
 		double dataDouble;
 		float dataFloat;
-		std::string dataString;
+		char dataString[];
 	};
 };
 
